@@ -9,5 +9,5 @@ public interface HourMeterService {
 
     List<HourMeterResponseDto> getAll();
 
-    HourMeterRequestDto createHourmeter (HourMeterRequestDto hourmeterDto);
+    HourMeterResponseDto createHourmeter (HourMeterRequestDto hourmeterDto);
 }
