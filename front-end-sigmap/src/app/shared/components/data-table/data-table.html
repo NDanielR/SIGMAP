@@ -1,0 +1,29 @@
+<section class="table-card">
+  <h2>{{ title() }}</h2>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Referencia</th>
+          <th>Equipo</th>
+          <th>Sistema / actividad</th>
+          <th>Indicador</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows(); track row.reference) {
+          <tr>
+            <td>
+              <strong>{{ row.reference }}</strong>
+            </td>
+            <td>{{ row.equipment }}</td>
+            <td>{{ row.activity }}</td>
+            <td>{{ row.indicator }}</td>
+            <td>{{ row.status }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

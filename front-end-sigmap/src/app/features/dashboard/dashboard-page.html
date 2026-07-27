@@ -1,0 +1,31 @@
+<header class="page-header">
+  <div>
+    <h1>{{ dashboard().title }}</h1>
+    <p>{{ dashboard().subtitle }}</p>
+  </div>
+  <div class="updated"><span aria-hidden="true"></span>Datos actualizados · 21:10</div>
+</header>
+
+<div class="page-content">
+  <label class="period">
+    <span class="sr-only">Periodo</span>
+    <select aria-label="Seleccionar periodo">
+      <option>Últimos 12 meses</option>
+      <option>Últimos 6 meses</option>
+      <option>Últimos 30 días</option>
+    </select>
+  </label>
+
+  <section class="metrics" aria-label="Indicadores principales">
+    @for (metric of dashboard().metrics; track metric.label) {
+      <app-metric-card [metric]="metric" />
+    }
+  </section>
+
+  <div class="charts">
+    <app-progress-panel [title]="dashboard().chartTitle" [items]="dashboard().chart" />
+    <app-progress-panel title="Estado general" [items]="dashboard().status" [compact]="true" />
+  </div>
+
+  <app-data-table [title]="dashboard().tableTitle" [rows]="dashboard().rows" />
+</div>

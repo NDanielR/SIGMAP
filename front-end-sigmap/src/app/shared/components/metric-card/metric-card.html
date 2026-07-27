@@ -1,0 +1,8 @@
+<article class="metric-card">
+  <div class="metric-heading">
+    <span class="metric-code" [class]="metric().accent">{{ metric().code }}</span>
+    <span>{{ metric().label }}</span>
+  </div>
+  <strong>{{ metric().value }}</strong>
+  <small [class]="metric().accent">{{ metric().caption }}</small>
+</article>

@@ -1,0 +1,16 @@
+<app-sidebar [open]="menuOpen()" (navigate)="closeMenu()" />
+<button
+  class="menu-toggle"
+  type="button"
+  (click)="toggleMenu()"
+  aria-label="Abrir menú"
+  [attr.aria-expanded]="menuOpen()"
+>
+  ☰
+</button>
+@if (menuOpen()) {
+  <button class="backdrop" type="button" (click)="closeMenu()" aria-label="Cerrar menú"></button>
+}
+<main class="main">
+  <router-outlet />
+</main>

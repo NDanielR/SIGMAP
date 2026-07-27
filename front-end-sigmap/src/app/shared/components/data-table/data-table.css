@@ -1,0 +1,45 @@
+.table-card {
+  padding: 20px 22px 28px;
+  border: 1px solid #d8e0da;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 12px rgba(16, 44, 29, 0.06);
+}
+h2 {
+  margin: 0 0 20px;
+  color: #222d28;
+  font-size: 16px;
+}
+.scroll {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  color: #2b342f;
+  font-size: 11px;
+  text-align: left;
+}
+thead {
+  background: #f0f5f1;
+  color: #68746d;
+}
+th {
+  padding: 13px 16px;
+  font-size: 10px;
+  font-weight: 500;
+}
+th:first-child {
+  border-radius: 8px 0 0 8px;
+}
+th:last-child {
+  border-radius: 0 8px 8px 0;
+}
+td {
+  padding: 18px 16px;
+  border-bottom: 1px solid #d8e0da;
+}
+td strong {
+  color: #43821e;
+}

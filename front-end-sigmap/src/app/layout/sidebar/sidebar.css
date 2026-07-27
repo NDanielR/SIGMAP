@@ -1,0 +1,124 @@
+:host {
+  display: contents;
+}
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 20;
+  width: 252px;
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #071c14;
+  color: #fff;
+  transition: transform 0.25s ease;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px;
+  color: inherit;
+  text-decoration: none;
+}
+.brand-mark,
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #fff;
+}
+.brand-mark {
+  overflow: hidden;
+  background: #4c901c;
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.08),
+    0 8px 18px rgba(0, 0, 0, 0.18);
+}
+.brand-mark img {
+  width: 124%;
+  height: 124%;
+  object-fit: cover;
+  object-position: 50% 45%;
+  clip-path: circle(40.5% at 50% 45%);
+  transform: scale(1.2);
+}
+.brand-copy {
+  min-width: 0;
+}
+.brand strong {
+  display: block;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 0.2px;
+}
+.brand small,
+.profile small {
+  display: block;
+  margin-top: 4px;
+  color: #9fc9ae;
+  font-size: 9px;
+  letter-spacing: 0.2px;
+}
+.menu-title {
+  margin: 38px 8px 14px;
+  color: #829a8e;
+  font-size: 10px;
+}
+nav {
+  display: grid;
+  gap: 8px;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  color: #b9c6bf;
+  text-decoration: none;
+  font-size: 14px;
+}
+.menu-item:hover {
+  background: #123426;
+  color: #fff;
+}
+.menu-item.active {
+  background: #46871a;
+  color: #fff;
+  font-weight: 700;
+}
+.menu-icon {
+  width: 18px;
+  font-size: 16px;
+  text-align: center;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+}
+.avatar {
+  width: 38px;
+  height: 38px;
+  background: #4c901c;
+  font-size: 12px;
+}
+.profile strong {
+  display: block;
+  font-size: 12px;
+}
+@media (max-width: 800px) {
+  .sidebar {
+    transform: translateX(-100%);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,33 @@
+<aside class="sidebar" [class.open]="open()" aria-label="Navegación principal">
+  <div>
+    <a class="brand" routerLink="/resumen" (click)="navigate.emit()" aria-label="Aguadulce, inicio">
+      <span class="brand-mark" aria-hidden="true">
+        <img src="/assets/brand/aguadulce-emblem.png" alt="" />
+      </span>
+      <span class="brand-copy">
+        <strong>AGUADULCE</strong>
+        <small>GESTIÓN DE MANTENIMIENTO</small>
+      </span>
+    </a>
+
+    <p class="menu-title">SISTEMA ANALÍTICO</p>
+    <nav>
+      @for (item of menuItems; track item.path) {
+        <a
+          class="menu-item"
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          (click)="navigate.emit()"
+        >
+          <span class="menu-icon" aria-hidden="true">{{ item.icon }}</span>
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+  </div>
+
+  <div class="profile">
+    <span class="avatar" aria-hidden="true">ND</span>
+    <span><strong>Nelson Daniel</strong><small>Analista de mantenimiento</small></span>
+  </div>
+</aside>

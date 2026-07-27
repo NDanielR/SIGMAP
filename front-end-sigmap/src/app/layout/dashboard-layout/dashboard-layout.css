@@ -1,0 +1,38 @@
+.main {
+  min-height: 100vh;
+  margin-left: 252px;
+}
+.menu-toggle {
+  display: none;
+  position: fixed;
+  z-index: 18;
+  top: 18px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 9px;
+  background: #0b281c;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.backdrop {
+  display: none;
+}
+@media (max-width: 800px) {
+  .main {
+    margin-left: 0;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .backdrop {
+    display: block;
+    position: fixed;
+    z-index: 19;
+    inset: 0;
+    border: 0;
+    background: rgba(4, 18, 12, 0.45);
+  }
+}

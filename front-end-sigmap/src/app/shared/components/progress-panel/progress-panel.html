@@ -1,0 +1,25 @@
+<section class="panel" [class.compact]="compact()">
+  <h2>{{ title() }}</h2>
+  <div class="items">
+    @for (item of items(); track item.label) {
+      <div class="item">
+        <div class="label">
+          <span>{{ item.label }}</span>
+          @if (item.displayValue) {
+            <strong [class]="item.accent">{{ item.displayValue }}</strong>
+          }
+        </div>
+        <div
+          class="track"
+          role="progressbar"
+          [attr.aria-label]="item.label"
+          [attr.aria-valuenow]="item.value"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <span [class]="item.accent ?? 'success'" [style.width.%]="item.value"></span>
+        </div>
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,52 @@
+.metric-card {
+  min-height: 132px;
+  padding: 18px;
+  border: 1px solid #d8e0da;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 12px rgba(16, 44, 29, 0.07);
+}
+.metric-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #737d77;
+  font-size: 12px;
+}
+.metric-code {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #e3f0dc;
+  color: #43821e;
+  font-weight: 700;
+}
+.metric-code.warning {
+  background: #fff0d2;
+  color: #ee8c00;
+}
+.metric-code.danger {
+  background: #fde5e2;
+  color: #df2e27;
+}
+strong {
+  display: block;
+  margin-top: 10px;
+  color: #1c2722;
+  font-size: 29px;
+  line-height: 1;
+}
+small {
+  display: block;
+  margin-top: 8px;
+  color: #43821e;
+  font-weight: 600;
+}
+small.warning {
+  color: #ef8d00;
+}
+small.danger {
+  color: #df2e27;
+}
