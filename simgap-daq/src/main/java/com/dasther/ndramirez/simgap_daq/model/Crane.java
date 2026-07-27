@@ -15,7 +15,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +35,8 @@ public class Crane {
     @Pattern(
             regexp = "^(RTG(0[1-9]|1[0-9])|QC0[1-6])$",
             message = "El código debe estar entre RTG01-RTG19 o QC01-QC06"
-    )
-    @Column(name = "name", nullable = false, length = 5, unique = true)
+        )
+    @Column(name = "Name", nullable = false, length = 5, unique = true)
     private String name;
 
     @NotNull
@@ -46,7 +45,7 @@ public class Crane {
     private CraneType type;
 
     @NotNull
-    @Column(name = "isOperational", nullable = false)
+    @Column(name = "IsOperational", nullable = false)
     private Boolean isOperational = true;
 
     @OneToMany(mappedBy = "crane")
