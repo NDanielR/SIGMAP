@@ -22,7 +22,7 @@ import java.time.Instant;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "HourMeters")
+@Table(name = "Hourmeters")
 
 public class HourMeters {
 

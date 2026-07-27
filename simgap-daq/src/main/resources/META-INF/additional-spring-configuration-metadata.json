@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "app.test-data.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Habilita la carga de datos de prueba al iniciar la aplicación",
+      "defaultValue": false
+    }
+  ]
+}

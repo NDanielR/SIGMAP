@@ -5,40 +5,96 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.dasther.ndramirez.simgap_daq.model.entity.Crane;
+import com.dasther.ndramirez.simgap_daq.model.entity.CraneType;
 import com.dasther.ndramirez.simgap_daq.model.entity.Device;
 import com.dasther.ndramirez.simgap_daq.repository.CraneRepository;
 import com.dasther.ndramirez.simgap_daq.repository.DeviceRepository;
 
 @Configuration
 public class TestDataLoader {
-    
+
     @Bean
     @ConditionalOnProperty(
-        name ="app.test-data.ennabled",
-        havingValue = "true"
+            name = "app.test-data.enabled",
+            havingValue = "true"
     )
+    CommandLineRunner loadTestData(
+            DeviceRepository deviceRepository,
+            CraneRepository craneRepository) {
 
-    CommandLineRunner loadDevices( DeviceRepository deviceRepository,
-        CraneRepository craneRepository){
-            
-            return args -> {
-            var crane = craneRepository.findByName("RTG01")
-                    .orElseThrow(() ->
-                            new IllegalStateException(
-                                    "Primero debe existir la grúa RTG01"
-                            )
-                    );
+        return args -> {
+            var rtg01 = getOrCreateCrane(
+                    craneRepository, "RTG01", CraneType.RTG);
+            var rtg02 = getOrCreateCrane(
+                    craneRepository, "RTG02", CraneType.RTG);
+            var qc01 = getOrCreateCrane(
+                    craneRepository, "QC01", CraneType.QC);
+            var qc02 = getOrCreateCrane(
+                    craneRepository, "QC02", CraneType.QC);
 
-            if (!deviceRepository.existsByMac("AA:BB:CC:DD:EE:01")) {
-                var device = new Device();
-                device.setName("ESP32-RTG01-01");
-                device.setAddressIp("192.168.1.101");
-                device.setMac("AA:BB:CC:DD:EE:01");
-                device.setCrane(crane);
-                device.setIsOperational(true);
+            createDeviceIfMissing(
+                    deviceRepository,
+                    "ESP32-RTG01-01",
+                    "192.168.1.101",
+                    "AA:BB:CC:DD:EE:01",
+                    rtg01);
 
-                deviceRepository.save(device);
-            }
+            createDeviceIfMissing(
+                    deviceRepository,
+                    "ESP32-RTG02-01",
+                    "192.168.1.102",
+                    "AA:BB:CC:DD:EE:02",
+                    rtg02);
+
+            createDeviceIfMissing(
+                    deviceRepository,
+                    "ESP32-QC01-01",
+                    "192.168.1.103",
+                    "AA:BB:CC:DD:EE:03",
+                    qc01);
+
+            createDeviceIfMissing(
+                    deviceRepository,
+                    "ESP32-QC02-01",
+                    "192.168.1.104",
+                    "AA:BB:CC:DD:EE:04",
+                    qc02);
         };
+    }
+
+    private Crane getOrCreateCrane(
+            CraneRepository craneRepository,
+            String name,
+            CraneType type) {
+
+        return craneRepository.findByName(name)
+                .orElseGet(() -> {
+                    var crane = new Crane();
+                    crane.setName(name);
+                    crane.setType(type);
+                    crane.setIsOperational(true);
+                    return craneRepository.save(crane);
+                });
+    }
+
+    private void createDeviceIfMissing(
+            DeviceRepository deviceRepository,
+            String name,
+            String addressIp,
+            String mac,
+            Crane crane) {
+
+        if (deviceRepository.existsByMac(mac)) {
+            return;
+        }
+
+        var device = new Device();
+        device.setName(name);
+        device.setAddressIp(addressIp);
+        device.setMac(mac);
+        device.setCrane(crane);
+        device.setIsOperational(true);
+        deviceRepository.save(device);
     }
 }
