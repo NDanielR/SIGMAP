@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.dasther.ndramirez.simgap_daq.model.entity.Crane;
-import com.dasther.ndramirez.simgap_daq.model.entity.CraneType;
-import com.dasther.ndramirez.simgap_daq.model.entity.Device;
-import com.dasther.ndramirez.simgap_daq.repository.CraneRepository;
-import com.dasther.ndramirez.simgap_daq.repository.DeviceRepository;
+import com.dasther.ndramirez.simgap_daq.model.entity.crane.Crane;
+import com.dasther.ndramirez.simgap_daq.model.entity.crane.CraneType;
+import com.dasther.ndramirez.simgap_daq.model.entity.device.Device;
+import com.dasther.ndramirez.simgap_daq.repository.crane.CraneRepository;
+import com.dasther.ndramirez.simgap_daq.repository.device.DeviceRepository;
 
 @Configuration
 public class TestDataLoader {

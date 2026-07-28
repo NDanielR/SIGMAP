@@ -1,4 +1,4 @@
-package com.dasther.ndramirez.simgap_daq.model.entity;
+package com.dasther.ndramirez.simgap_daq.model.entity.hourmeter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,6 +17,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
+
+import com.dasther.ndramirez.simgap_daq.model.entity.crane.CraneType;
+import com.dasther.ndramirez.simgap_daq.model.entity.device.Device;
 
 @Getter
 @Setter

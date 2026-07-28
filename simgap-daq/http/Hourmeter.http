@@ -1,2 +1,17 @@
 ###
 GET http://localhost:8080/api/v1/horometro
+
+###
+POST http://localhost:8080/api/v1/horometro
+Content-Type: application/json
+
+{
+    "deviceId" : 4,
+    "craneOn" : 100,
+    "hoistOn" : 230,
+    "trolleyOn" : 65,
+    "gantryOn" : 3,
+    "overlapOn" : 2,
+    "boomOn" : 20,
+    "dateReport" : "2026-07-28T11:30:00Z"
+}

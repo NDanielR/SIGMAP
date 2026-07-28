@@ -1,8 +1,8 @@
-package com.dasther.ndramirez.simgap_daq.repository;
+package com.dasther.ndramirez.simgap_daq.repository.device;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.dasther.ndramirez.simgap_daq.model.entity.Device;
+import com.dasther.ndramirez.simgap_daq.model.entity.device.Device;
 
 public interface DeviceRepository extends JpaRepository<Device, Long> {
 

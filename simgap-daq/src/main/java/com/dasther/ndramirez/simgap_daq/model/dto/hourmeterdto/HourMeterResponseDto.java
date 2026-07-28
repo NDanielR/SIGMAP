@@ -1,4 +1,4 @@
-package com.dasther.ndramirez.simgap_daq.model.dto;
+package com.dasther.ndramirez.simgap_daq.model.dto.hourmeterdto;
 
 import java.time.Instant;
 

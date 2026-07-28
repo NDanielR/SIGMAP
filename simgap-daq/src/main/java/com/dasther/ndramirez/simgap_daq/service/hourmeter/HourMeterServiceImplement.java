@@ -1,4 +1,4 @@
-package com.dasther.ndramirez.simgap_daq.service;
+package com.dasther.ndramirez.simgap_daq.service.hourmeter;
 
 import java.time.Instant;
 import java.util.List;
@@ -7,12 +7,12 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dasther.ndramirez.simgap_daq.model.dto.HourMeterRequestDto;
-import com.dasther.ndramirez.simgap_daq.model.dto.HourMeterResponseDto;
-import com.dasther.ndramirez.simgap_daq.model.entity.Device;
-import com.dasther.ndramirez.simgap_daq.model.entity.HourMeters;
-import com.dasther.ndramirez.simgap_daq.repository.DeviceRepository;
-import com.dasther.ndramirez.simgap_daq.repository.HourMeterRepository;
+import com.dasther.ndramirez.simgap_daq.model.dto.hourmeterdto.HourMeterRequestDto;
+import com.dasther.ndramirez.simgap_daq.model.dto.hourmeterdto.HourMeterResponseDto;
+import com.dasther.ndramirez.simgap_daq.model.entity.device.Device;
+import com.dasther.ndramirez.simgap_daq.model.entity.hourmeter.HourMeters;
+import com.dasther.ndramirez.simgap_daq.repository.device.DeviceRepository;
+import com.dasther.ndramirez.simgap_daq.repository.hourmeter.HourMeterRepository;
 
 @Service
 public class HourMeterServiceImplement implements HourMeterService{
@@ -49,6 +49,15 @@ public class HourMeterServiceImplement implements HourMeterService{
         var savedHourMeter = hourMeterRepository.save(hourMeter);
 
         return toDto(savedHourMeter);
+    }
+
+    @Override
+    public List<HourMeterResponseDto> getByCraneName(String name) {
+
+        return hourMeterRepository.findByDevice_Crane_NameIgnoreCaseOrderByDateReportDesc(name)
+                .stream()
+                .map(this::toDto)
+                .toList();
     }
 
     private HourMeterResponseDto toDto(HourMeters hourMeter) {

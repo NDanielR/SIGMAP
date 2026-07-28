@@ -1,17 +1,21 @@
-package com.dasther.ndramirez.simgap_daq.controller;
+package com.dasther.ndramirez.simgap_daq.controller.hourmeter;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dasther.ndramirez.simgap_daq.model.dto.HourMeterRequestDto;
-import com.dasther.ndramirez.simgap_daq.model.dto.HourMeterResponseDto;
-import com.dasther.ndramirez.simgap_daq.service.HourMeterService;
+import com.dasther.ndramirez.simgap_daq.model.dto.hourmeterdto.HourMeterRequestDto;
+import com.dasther.ndramirez.simgap_daq.model.dto.hourmeterdto.HourMeterResponseDto;
+import com.dasther.ndramirez.simgap_daq.service.hourmeter.HourMeterService;
+
+import jakarta.validation.Valid;
 
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -30,8 +34,13 @@ public class HourMeterController {
         return hourMeterService.getAll();
     }
 
+    @GetMapping("/nombregrua")
+    public List<HourMeterResponseDto> getByName(@RequestParam String name) {
+        return hourMeterService.getByCraneName(name);
+    }
+    
     @PostMapping()
-    public HourMeterResponseDto RegisterHourmeters(@RequestBody HourMeterRequestDto hourDto) {
+    public HourMeterResponseDto RegisterHourmeters(@Valid @RequestBody HourMeterRequestDto hourDto) {
         return hourMeterService.createHourmeter(hourDto);
         
     }
