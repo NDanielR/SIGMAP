@@ -39,11 +39,7 @@ public class HourMeterServiceImplement implements HourMeterService{
     @Override
     @Transactional
     public HourMeterResponseDto createHourmeter(HourMeterRequestDto hourmeterDto) {
-        var device = deviceRepository.findById(hourmeterDto.getDeviceId())
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "No existe un dispositivo con ID "
-                                + hourmeterDto.getDeviceId()
-                ));
+        var device = getDeviceById(hourmeterDto.getDeviceId());
 
         var hourMeter = toEntity(hourmeterDto, device);
         var savedHourMeter = hourMeterRepository.save(hourMeter);
@@ -58,6 +54,34 @@ public class HourMeterServiceImplement implements HourMeterService{
                 .stream()
                 .map(this::toDto)
                 .toList();
+    }
+
+    @Override
+    @Transactional
+    public HourMeterResponseDto updateHourmeter(Long id, HourMeterRequestDto hourmeterDto) {
+
+        var hourMeter = hourMeterRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "No existe un registro de horómetro con ID " + id
+                ));
+
+        var device = getDeviceById(hourmeterDto.getDeviceId());
+
+        updateEntity(hourMeter, hourmeterDto, device);
+        var updatedHourMeter = hourMeterRepository.save(hourMeter);
+
+        return toDto(updatedHourMeter);
+    }
+
+    @Override
+    @Transactional
+    public void deleteHourmeter(Long id) {
+        var hourMeter = hourMeterRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "No existe un registro de horómetro con ID " + id
+                ));
+
+        hourMeterRepository.delete(hourMeter);
     }
 
     private HourMeterResponseDto toDto(HourMeters hourMeter) {
@@ -88,5 +112,26 @@ public class HourMeterServiceImplement implements HourMeterService{
         hourMeter.setDateReception(Instant.now());
         return hourMeter;
     }
-    
+
+    private void updateEntity(
+            HourMeters hourMeter,
+            HourMeterRequestDto dto,
+            Device device) {
+
+        hourMeter.setDevice(device);
+        hourMeter.setTimeCraneOn(dto.getCraneOn());
+        hourMeter.setTimeHoistOn(dto.getHoistOn());
+        hourMeter.setTimeTrolleyOn(dto.getTrolleyOn());
+        hourMeter.setTimeGantryOn(dto.getGantryOn());
+        hourMeter.setTimeOverlapOn(dto.getOverlapOn());
+        hourMeter.setTimeBoomOn(dto.getBoomOn());
+        hourMeter.setDateReport(dto.getDateReport());
+    }
+
+    private Device getDeviceById(Long deviceId) {
+        return deviceRepository.findById(deviceId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "No existe un dispositivo con ID " + deviceId
+                ));
+    }
 }

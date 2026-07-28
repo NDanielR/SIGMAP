@@ -1,0 +1,24 @@
+###
+GET http://localhost:8080/api/v1/gruas
+
+###
+GET http://localhost:8080/api/v1/gruas/buscar/QC
+
+###
+GET http://localhost:8080/api/v1/gruas/buscar/01
+
+###
+GET http://localhost:8080/api/v1/gruas/buscar/RTG
+
+###
+GET http://localhost:8080/api/v1/gruas
+
+###
+POST http://localhost:8080/api/v1/gruas
+Content-Type: application/json
+
+{
+  "name": "RTG03",
+  "type": "RTG",
+  "isOperational": true
+}

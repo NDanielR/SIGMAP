@@ -11,5 +11,9 @@ public interface HourMeterService {
 
     List<HourMeterResponseDto> getByCraneName(String name);
 
-    HourMeterResponseDto createHourmeter (HourMeterRequestDto hourmeterDto);
+    HourMeterResponseDto createHourmeter(HourMeterRequestDto hourmeterDto);
+
+    HourMeterResponseDto updateHourmeter(Long id, HourMeterRequestDto hourmeterDto);
+
+    void deleteHourmeter(Long id);
 }

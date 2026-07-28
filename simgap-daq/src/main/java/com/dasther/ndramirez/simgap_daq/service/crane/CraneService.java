@@ -14,5 +14,9 @@ public interface CraneService {
     List<CraneResponseDto> searchByName(String text);
 
     CraneResponseDto createCrane(CraneRequestDto craneDto);
+
+    CraneResponseDto updateCrane(Long id, CraneRequestDto craneDto);
+
+    void deleteCrane(Long id);
     
 }

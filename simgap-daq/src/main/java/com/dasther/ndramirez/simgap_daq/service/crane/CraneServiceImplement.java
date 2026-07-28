@@ -43,9 +43,9 @@ public class CraneServiceImplement implements CraneService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<CraneResponseDto> searchByName(String text) {
+    public List<CraneResponseDto> searchByName(String name) {
         return craneRepository
-                .findByNameContainingIgnoreCaseOrderByNameAsc(text)
+                .findByNameContainingIgnoreCaseOrderByNameAsc(name)
                 .stream()
                 .map(this::toDto)
                 .toList();
@@ -66,6 +66,41 @@ public class CraneServiceImplement implements CraneService {
         return toDto(savedCrane);
     }
 
+    @Override
+    @Transactional
+    public CraneResponseDto updateCrane(Long id, CraneRequestDto craneDto) {
+
+        var crane = craneRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "No existe una grúa con ID " + id
+                ));
+
+        if (craneRepository.existsByNameAndIdCraneNot(
+                craneDto.getName(),
+                id)) {
+            throw new EntityExistsException(
+                    "Ya existe otra grúa con el nombre "
+                            + craneDto.getName()
+            );
+        }
+
+        updateEntity(crane, craneDto);
+        var updatedCrane = craneRepository.save(crane);
+
+        return toDto(updatedCrane);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCrane(Long id) {
+        var crane = craneRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "No existe una grúa con ID " + id
+                ));
+
+        craneRepository.delete(crane);
+    }
+
     private CraneResponseDto toDto(Crane crane) {
         var dto = new CraneResponseDto();
         dto.setIdCrane(crane.getIdCrane());
@@ -82,5 +117,10 @@ public class CraneServiceImplement implements CraneService {
         crane.setIsOperational(dto.getIsOperational());
         return crane;
     }
-    
+
+    private void updateEntity(Crane crane, CraneRequestDto dto) {
+        crane.setName(dto.getName());
+        crane.setType(dto.getType());
+        crane.setIsOperational(dto.getIsOperational());
+    }
 }

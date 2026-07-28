@@ -11,6 +11,8 @@ public interface CraneRepository extends JpaRepository <Crane, Long> {
 
     Optional <Crane> findByName(String name);
 
+    boolean existsByNameAndIdCraneNot(String name, Long idCrane);
+
     List<Crane> findByNameContainingIgnoreCaseOrderByNameAsc(String text);
     
 }
