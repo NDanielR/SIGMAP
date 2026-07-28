@@ -38,7 +38,9 @@ public class CraneController {
     }
 
     @GetMapping("/nombre/{name}")
-    public CraneResponseDto getByName(@PathVariable String name) {
+    public CraneResponseDto getByName(@PathVariable
+            @NotBlank(message = "El nombre de búsqueda es obligatorio")
+            String name) {
         return craneService.getByName(name);
     }
 
