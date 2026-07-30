@@ -85,7 +85,7 @@ public class TestDataLoader {
             String mac,
             Crane crane) {
 
-        if (deviceRepository.existsByMac(mac)) {
+        if (deviceRepository.existsByMacIgnoreCase(mac)) {
             return;
         }
 
