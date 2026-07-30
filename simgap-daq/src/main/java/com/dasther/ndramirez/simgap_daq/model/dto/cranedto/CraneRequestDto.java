@@ -2,6 +2,7 @@ package com.dasther.ndramirez.simgap_daq.model.dto.cranedto;
 
 import com.dasther.ndramirez.simgap_daq.model.entity.crane.CraneType;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,8 +14,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Schema(description = "Datos requeridos para crear o actualizar una grúa")
 public class CraneRequestDto {
 
+    @Schema(
+            description = "Código único de la grúa",
+            example = "RTG01",
+            pattern = "^(RTG(0[1-9]|1[0-9])|QC0[1-6])$"
+    )
     @NotBlank(message = "El nombre de la grúa es obligatorio")
     @Pattern(
             regexp = "^(RTG(0[1-9]|1[0-9])|QC0[1-6])$",
@@ -22,9 +29,11 @@ public class CraneRequestDto {
     )
     private String name;
 
+    @Schema(description = "Tipo de grúa", example = "RTG")
     @NotNull(message = "El tipo de grúa es obligatorio")
     private CraneType type;
 
+    @Schema(description = "Indica si la grúa está operativa", example = "true")
     @NotNull(message = "El estado operativo de la grúa es obligatorio")
     private Boolean isOperational;
 

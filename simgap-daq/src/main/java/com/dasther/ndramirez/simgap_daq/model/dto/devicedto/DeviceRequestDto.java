@@ -1,5 +1,6 @@
 package com.dasther.ndramirez.simgap_daq.model.dto.devicedto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -12,8 +13,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Schema(description = "Datos requeridos para crear o actualizar un dispositivo")
 public class DeviceRequestDto {
 
+    @Schema(description = "Nombre único del dispositivo", example = "DAQ-RTG01")
     @NotBlank(message = "El nombre del dispositivo es obligatorio")
     @Size(
             min = 3,
@@ -22,6 +25,7 @@ public class DeviceRequestDto {
     )
     private String name;
 
+    @Schema(description = "Dirección IPv4 única", example = "192.168.1.10")
     @NotBlank(message = "La dirección IP es obligatoria")
     @Pattern(
             regexp = "^(?:(?:25[0-5]|2[0-4]\\d|1?\\d?\\d)\\.){3}"
@@ -30,6 +34,11 @@ public class DeviceRequestDto {
     )
     private String addressIp;
 
+    @Schema(
+            description = "Dirección MAC única",
+            example = "AA:BB:CC:DD:EE:01",
+            pattern = "^(?:[0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$"
+    )
     @NotBlank(message = "La dirección MAC es obligatoria")
     @Pattern(
             regexp = "^(?:[0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$",
@@ -37,10 +46,15 @@ public class DeviceRequestDto {
     )
     private String mac;
 
+    @Schema(description = "ID de la grúa asociada", example = "1")
     @NotNull(message = "El ID de la grúa es obligatorio")
     @Positive(message = "El ID de la grúa debe ser mayor que cero")
     private Long craneId;
 
+    @Schema(
+            description = "Indica si el dispositivo está operativo",
+            example = "true"
+    )
     @NotNull(message = "El estado operativo del dispositivo es obligatorio")
     private Boolean isOperational;
 }
