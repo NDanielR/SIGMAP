@@ -61,7 +61,7 @@ public class DeviceServiceImplement implements DeviceService {
     @Transactional
     public DeviceResponseDto createDevice(DeviceRequestDto deviceDto) {
         validateUniqueFields(deviceDto, null);
-        var crane = getCraneById(deviceDto.getCraneId());
+        var crane = getCraneByName(deviceDto.getCraneName());
         var device = toEntity(deviceDto, crane);
         var savedDevice = deviceRepository.save(device);
         return toDto(savedDevice);
@@ -75,7 +75,7 @@ public class DeviceServiceImplement implements DeviceService {
 
         var device = getDeviceById(id);
         validateUniqueFields(deviceDto, id);
-        var crane = getCraneById(deviceDto.getCraneId());
+        var crane = getCraneByName(deviceDto.getCraneName());
 
         updateEntity(device, deviceDto, crane);
         var updatedDevice = deviceRepository.save(device);
@@ -136,10 +136,11 @@ public class DeviceServiceImplement implements DeviceService {
                 ));
     }
 
-    private Crane getCraneById(Long craneId) {
-        return craneRepository.findById(craneId)
+    private Crane getCraneByName(String craneName) {
+        var normalizedCraneName = craneName.trim();
+        return craneRepository.findByNameIgnoreCase(normalizedCraneName)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "No existe una grúa con ID " + craneId
+                        "No existe una grúa con el nombre " + normalizedCraneName
                 ));
     }
 

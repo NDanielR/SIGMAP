@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -60,10 +59,14 @@ public class DeviceRequestDto {
     @Max(value = 31, message = "El slot debe estar entre 0 y 31")
     private Integer slot;
 
-    @Schema(description = "ID de la grúa asociada", example = "1")
-    @NotNull(message = "El ID de la grúa es obligatorio")
-    @Positive(message = "El ID de la grúa debe ser mayor que cero")
-    private Long craneId;
+    @Schema(description = "Nombre de la grúa asociada", example = "RTG01")
+    @NotBlank(message = "El nombre de la grúa es obligatorio")
+    @Size(
+            min = 3,
+            max = 50,
+            message = "El nombre de la grúa debe tener entre 3 y 50 caracteres"
+    )
+    private String craneName;
 
     @Schema(
             description = "Indica si el dispositivo está operativo",

@@ -15,7 +15,7 @@ Content-Type: application/json
   "name": "DAQ-RTG01",
   "addressIp": "192.168.1.10",
   "mac": "AA:BB:CC:DD:EE:01",
-  "craneId": 1,
+  "craneName": "RTG01",
   "rack":0,
   "slot":1,
   "isOperational": true
@@ -29,7 +29,9 @@ Content-Type: application/json
   "name": "DAQ-RTG01",
   "addressIp": "192.168.1.20",
   "mac": "AA:BB:CC:DD:EE:01",
-  "craneId": 1,
+  "craneName": "RTG01",
+  "rack": 0,
+  "slot": 1,
   "isOperational": false
 }
 
