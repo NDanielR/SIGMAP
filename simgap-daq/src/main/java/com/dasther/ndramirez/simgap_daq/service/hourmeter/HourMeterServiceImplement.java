@@ -3,7 +3,7 @@ package com.dasther.ndramirez.simgap_daq.service.hourmeter;
 import java.time.Instant;
 import java.util.List;
 
-import jakarta.persistence.EntityNotFoundException;
+import com.dasther.ndramirez.simgap_daq.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,7 +61,7 @@ public class HourMeterServiceImplement implements HourMeterService{
     public HourMeterResponseDto updateHourmeter(Long id, HourMeterRequestDto hourmeterDto) {
 
         var hourMeter = hourMeterRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "No existe un registro de horómetro con ID " + id
                 ));
 
@@ -77,7 +77,7 @@ public class HourMeterServiceImplement implements HourMeterService{
     @Transactional
     public void deleteHourmeter(Long id) {
         var hourMeter = hourMeterRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "No existe un registro de horómetro con ID " + id
                 ));
 
@@ -130,7 +130,7 @@ public class HourMeterServiceImplement implements HourMeterService{
 
     private Device getDeviceById(Long deviceId) {
         return deviceRepository.findById(deviceId)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "No existe un dispositivo con ID " + deviceId
                 ));
     }

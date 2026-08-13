@@ -11,6 +11,9 @@ import lombok.Setter;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -56,6 +59,7 @@ public class HourMeterRequestDto {
     @PositiveOrZero(message = "El horómetro del boom no puede ser negativo")
     private Long boomOn;
 
+    @JsonFormat(shape = Shape.STRING, pattern = "dd/mm/yyyy hh:mm:ss" )
     @Schema(
             description = "Instante UTC en que el dispositivo generó el reporte",
             example = "2026-07-28T19:39:37Z",

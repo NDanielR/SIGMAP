@@ -11,9 +11,9 @@ import com.dasther.ndramirez.simgap_daq.model.entity.crane.Crane;
 import com.dasther.ndramirez.simgap_daq.model.entity.device.Device;
 import com.dasther.ndramirez.simgap_daq.repository.crane.CraneRepository;
 import com.dasther.ndramirez.simgap_daq.repository.device.DeviceRepository;
+import com.dasther.ndramirez.simgap_daq.exception.DuplicateResourceException;
+import com.dasther.ndramirez.simgap_daq.exception.ResourceNotFoundException;
 
-import jakarta.persistence.EntityExistsException;
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class DeviceServiceImplement implements DeviceService {
@@ -42,7 +42,7 @@ public class DeviceServiceImplement implements DeviceService {
     public DeviceResponseDto getByName(String name) {
         return deviceRepository.findByName(name)
                 .map(this::toDto)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "No existe un dispositivo con el nombre " + name
                 ));
     }
@@ -125,14 +125,14 @@ public class DeviceServiceImplement implements DeviceService {
 
     private Device getDeviceById(Long deviceId) {
         return deviceRepository.findById(deviceId)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "No existe un dispositivo con ID " + deviceId
                 ));
     }
 
     private Crane getCraneById(Long craneId) {
         return craneRepository.findById(craneId)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "No existe una grúa con ID " + craneId
                 ));
     }
@@ -149,7 +149,7 @@ public class DeviceServiceImplement implements DeviceService {
                 );
 
         if (duplicateName) {
-            throw new EntityExistsException(
+            throw new DuplicateResourceException(
                     "Ya existe un dispositivo con el nombre " + dto.getName()
             );
         }
@@ -162,7 +162,7 @@ public class DeviceServiceImplement implements DeviceService {
                 );
 
         if (duplicateIp) {
-            throw new EntityExistsException(
+            throw new DuplicateResourceException(
                     "Ya existe un dispositivo con la dirección IP "
                             + dto.getAddressIp()
             );
@@ -176,7 +176,7 @@ public class DeviceServiceImplement implements DeviceService {
                 );
 
         if (duplicateMac) {
-            throw new EntityExistsException(
+            throw new DuplicateResourceException(
                     "Ya existe un dispositivo con la dirección MAC "
                             + dto.getMac()
             );

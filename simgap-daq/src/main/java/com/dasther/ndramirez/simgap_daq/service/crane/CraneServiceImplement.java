@@ -9,9 +9,9 @@ import com.dasther.ndramirez.simgap_daq.model.dto.cranedto.CraneRequestDto;
 import com.dasther.ndramirez.simgap_daq.model.dto.cranedto.CraneResponseDto;
 import com.dasther.ndramirez.simgap_daq.model.entity.crane.Crane;
 import com.dasther.ndramirez.simgap_daq.repository.crane.CraneRepository;
+import com.dasther.ndramirez.simgap_daq.exception.DuplicateResourceException;
+import com.dasther.ndramirez.simgap_daq.exception.ResourceNotFoundException;
 
-import jakarta.persistence.EntityExistsException;
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CraneServiceImplement implements CraneService {
@@ -36,7 +36,7 @@ public class CraneServiceImplement implements CraneService {
     public CraneResponseDto getByName(String name) {
         return craneRepository.findByName(name)
                 .map(this::toDto)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "No existe una grúa con el nombre " + name
                 ));
     }
@@ -55,7 +55,7 @@ public class CraneServiceImplement implements CraneService {
     @Transactional
     public CraneResponseDto createCrane(CraneRequestDto craneDto) {
         if (craneRepository.findByName(craneDto.getName()).isPresent()) {
-            throw new EntityExistsException(
+            throw new DuplicateResourceException(
                     "Ya existe una grúa con el nombre " + craneDto.getName()
             );
         }
@@ -71,14 +71,14 @@ public class CraneServiceImplement implements CraneService {
     public CraneResponseDto updateCrane(Long id, CraneRequestDto craneDto) {
 
         var crane = craneRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "No existe una grúa con ID " + id
                 ));
 
         if (craneRepository.existsByNameAndIdCraneNot(
                 craneDto.getName(),
                 id)) {
-            throw new EntityExistsException(
+            throw new DuplicateResourceException(
                     "Ya existe otra grúa con el nombre "
                             + craneDto.getName()
             );
@@ -94,7 +94,7 @@ public class CraneServiceImplement implements CraneService {
     @Transactional
     public void deleteCrane(Long id) {
         var crane = craneRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "No existe una grúa con ID " + id
                 ));
 
