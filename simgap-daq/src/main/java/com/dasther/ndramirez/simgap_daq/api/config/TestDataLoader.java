@@ -33,31 +33,39 @@ public class TestDataLoader {
             var qc02 = getOrCreateCrane(
                     craneRepository, "QC02", CraneType.QC);
 
-            createDeviceIfMissing(
+            configureDevice(
                     deviceRepository,
                     "ESP32-RTG01-01",
                     "192.168.1.101",
+                    0,
+                    1,
                     "AA:BB:CC:DD:EE:01",
                     rtg01);
 
-            createDeviceIfMissing(
+            configureDevice(
                     deviceRepository,
                     "ESP32-RTG02-01",
                     "192.168.1.102",
+                    0,
+                    1,
                     "AA:BB:CC:DD:EE:02",
                     rtg02);
 
-            createDeviceIfMissing(
+            configureDevice(
                     deviceRepository,
                     "ESP32-QC01-01",
                     "192.168.1.103",
+                    0,
+                    1,
                     "AA:BB:CC:DD:EE:03",
                     qc01);
 
-            createDeviceIfMissing(
+            configureDevice(
                     deviceRepository,
                     "ESP32-QC02-01",
                     "192.168.1.104",
+                    0,
+                    1,
                     "AA:BB:CC:DD:EE:04",
                     qc02);
         };
@@ -78,23 +86,22 @@ public class TestDataLoader {
                 });
     }
 
-    private void createDeviceIfMissing(
+    private void configureDevice(
             DeviceRepository deviceRepository,
             String name,
             String addressIp,
+            Integer rack,
+            Integer slot,
             String mac,
             Crane crane) {
 
-        if (deviceRepository.existsByMacIgnoreCase(mac)) {
-            return;
-        }
-
-        var device = new Device();
+        var device = deviceRepository.findByName(name)
+                .orElseGet(Device::new);
         device.setName(name);
         device.setAddressIp(addressIp);
         device.setMac(mac);
-        device.setRack(0);
-        device.setSlot(1);
+        device.setRack(rack);
+        device.setSlot(slot);
         device.setCrane(crane);
         device.setIsOperational(true);
         deviceRepository.save(device);
