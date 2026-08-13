@@ -18,7 +18,7 @@
 |  decide to adopt.                                                            |
 |                                                                              |
 |=============================================================================*/
-package Moka7;
+package com.dasther.ndramirez.simgap_daq.integration.moka7;
 
 // See §33.19 of "System Software for S7-300/400 System and Standard Functions"
 public class S7Protection {

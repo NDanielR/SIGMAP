@@ -18,7 +18,7 @@
 |  decide to adopt.                                                            |
 |                                                                              |
 |=============================================================================*/
-package Moka7;
+package com.dasther.ndramirez.simgap_daq.integration.moka7;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;

@@ -19,7 +19,7 @@
 |                                                                              |
 |=============================================================================*/
 
-package Moka7;
+package com.dasther.ndramirez.simgap_daq.integration.moka7;
 
 /**
  * Quick class to pass an integer by reference
