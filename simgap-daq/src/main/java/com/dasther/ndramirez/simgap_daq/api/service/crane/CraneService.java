@@ -1,0 +1,22 @@
+package com.dasther.ndramirez.simgap_daq.api.service.crane;
+
+import java.util.List;
+
+import com.dasther.ndramirez.simgap_daq.api.model.dto.cranedto.CraneRequestDto;
+import com.dasther.ndramirez.simgap_daq.api.model.dto.cranedto.CraneResponseDto;
+
+public interface CraneService {
+
+    List<CraneResponseDto> getAll();
+
+    CraneResponseDto getByName(String name);
+
+    List<CraneResponseDto> searchByName(String text);
+
+    CraneResponseDto createCrane(CraneRequestDto craneDto);
+
+    CraneResponseDto updateCrane(Long id, CraneRequestDto craneDto);
+
+    void deleteCrane(Long id);
+    
+}
