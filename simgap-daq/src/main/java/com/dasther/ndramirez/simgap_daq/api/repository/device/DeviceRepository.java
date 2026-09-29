@@ -21,13 +21,12 @@ public interface DeviceRepository extends JpaRepository<Device, Long> {
 
     boolean existsByNameAndIdDeviceNot(String name, Long idDevice);
 
-    boolean existsByAddressIpAndIdDeviceNot(
-            String addressIp,
-            Long idDevice
-    );
+    boolean existsByAddressIpAndIdDeviceNot(String addressIp, Long idDevice);
 
-    boolean existsByMacIgnoreCaseAndIdDeviceNot(
-            String mac,
-            Long idDevice
-    );
+    boolean existsByMacIgnoreCaseAndIdDeviceNot(String mac, Long idDevice);
+
+    List<Device> findByIsOperationalTrue();
+
+    List<Device> findByIsOperationalTrueAndCrane_IsOperationalTrue();
+
 }
