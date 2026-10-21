@@ -22,10 +22,12 @@ public class CraneServiceImplem implements CraneService {
     private final CraneRepository craneRepository;
     private final CraneMapper craneMapper;
 
-    public CraneServiceImplem(CraneRepository craneRepository,
-            CraneMapper craneMapper) {
-        this.craneRepository = craneRepository;
-        this.craneMapper = craneMapper;
+    public CraneServiceImplem(
+        CraneRepository craneRepository,
+        CraneMapper craneMapper) {
+
+            this.craneRepository = craneRepository;
+            this.craneMapper = craneMapper;
     }
 
     @Override
