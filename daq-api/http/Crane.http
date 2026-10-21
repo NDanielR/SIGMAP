@@ -1,0 +1,34 @@
+###
+GET http://localhost:8080/api/cranes
+
+###
+GET http://localhost:8080/api/cranes/id/1
+
+###
+GET http://localhost:8080/api/cranes/name/q
+
+###
+POST http://localhost:8080/api/cranes
+Content-Type: application/json
+
+{
+    "name":"QC01",
+    "ip":"192.168.0.1",
+    "rack":"0",
+    "slot":"2",
+    "type":"QC"
+}
+
+###
+PUT http://localhost:8080/api/cranes/1
+Content-Type: application/json
+
+{
+    "name": "QC01",
+    "ip": "192.168.0.1",
+    "rack": 0,
+    "slot": 2
+}
+
+###
+DELETE http://localhost:8080/api/cranes/1
