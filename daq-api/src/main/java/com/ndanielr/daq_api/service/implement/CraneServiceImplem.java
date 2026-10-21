@@ -14,8 +14,6 @@ import com.ndanielr.daq_api.model.mapper.CraneMapper;
 import com.ndanielr.daq_api.repository.CraneRepository;
 import com.ndanielr.daq_api.service.CraneService;
 
-import lombok.var;
-
 @Service
 public class CraneServiceImplem implements CraneService {
 
