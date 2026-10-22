@@ -1,6 +1,6 @@
 package com.ndanielr.daq_api.model.dto;
 
-import java.util.Date;
+import java.time.Instant;
 
 public record HourmeterResponseDto(
     String craneName,
@@ -10,5 +10,5 @@ public record HourmeterResponseDto(
     Long gantryOn,
     Long overlapOn,
     Long boomOn,
-    Date dateRegistration
+    Instant dateRegistration
 ) {}

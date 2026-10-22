@@ -1,5 +1,6 @@
 package com.ndanielr.daq_api.model.entity;
 
+import java.time.Instant;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -10,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -59,6 +61,9 @@ public class HourmeterQC {
     @Column(nullable = false)
     private Long boomOn;
 
-    private Date dateRegistration;
+    @NotNull(message = "La fecha es obligatoria")
+    @PastOrPresent(message = "La fecha no puede ser futura")
+    @Column(nullable = false)
+    private Instant dateRegistration;
 
 }
