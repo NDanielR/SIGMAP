@@ -1,7 +1,6 @@
 package com.ndanielr.daq_api.model.entity;
 
 import java.time.Instant;
-import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
